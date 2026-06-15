@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>宝宝喂养 · 0–3 岁 · 数据详情</title>
+<style>
+  :root{ --ink:#2F3B37; --ink2:#9AA8A2; --line:#EAF1EE; --accent:#4FC0A1; --accent-deep:#34A98A; --accent-soft:#E6F7F1; --accent-line:#C3EADD; --mint:#F2F9F7; --blue:#6AA6DB; --blue-soft:#EAF3FB; --blue-line:#CFE3F4; --warn-soft:#FCEFE4; --warn-deep:#C26A33; }
+  *{ box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+  body{ margin:0; background:#E3ECE9; font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif; display:flex; justify-content:center; align-items:flex-start; min-height:100vh; padding:22px 16px; color:var(--ink); }
+  .phone{ width:100%; max-width:390px; border-radius:44px; overflow:hidden; background:linear-gradient(180deg,#FCFEFD,#F1F9F6); box-shadow:0 22px 55px rgba(60,110,95,.20); display:flex; flex-direction:column; min-height:760px; }
+  .statusbar{ display:flex; justify-content:space-between; align-items:center; padding:15px 27px 0; font-size:13px; font-weight:600; color:#56635E; } .statusbar .dots{ letter-spacing:1px; opacity:.5; font-size:11px; }
+  .scroll{ flex:1; overflow-y:auto; padding:8px 20px 24px; }
+  .hello{ font-size:13px; color:var(--ink2); margin:8px 2px 2px; } h2{ font-size:22px; margin:2px 2px 4px; font-weight:600; } .sub{ font-size:13px; color:var(--ink2); margin:0 2px 14px; }
+
+  .ages{ display:flex; gap:7px; margin-bottom:14px; }
+  .age{ flex:1; text-align:center; padding:10px 3px; border-radius:13px; background:#fff; border:1px solid var(--line); cursor:pointer; transition:.15s; }
+  .age:active{ transform:scale(.96); } .age.on{ background:var(--accent); border-color:var(--accent); box-shadow:0 6px 16px rgba(79,192,161,.3); }
+  .age .a1{ font-size:13.5px; font-weight:700; color:#3B4742; } .age.on .a1{ color:#fff; } .age .a2{ font-size:10px; color:var(--ink2); margin-top:2px; } .age.on .a2{ color:rgba(255,255,255,.85); }
+
+  .disc{ font-size:11px; color:#A98B6A; background:#FBF3EA; border:1px solid #F0E1CF; border-radius:11px; padding:9px 11px; line-height:1.55; margin-bottom:16px; }
+
+  .sechead{ font-size:13px; font-weight:700; color:#46504A; margin:18px 2px 9px; display:flex; align-items:baseline; gap:7px; } .sechead .he{ font-size:11px; font-weight:400; color:#AEBAB4; }
+  .card{ background:#fff; border:1px solid var(--line); border-radius:18px; padding:6px 15px; box-shadow:0 4px 14px rgba(70,120,105,.05); margin-bottom:11px; }
+  .card.pad{ padding:15px; }
+
+  .feed{ display:flex; align-items:center; gap:13px; }
+  .feed .badge{ width:50px; height:50px; flex:none; border-radius:15px; background:var(--accent-soft); display:flex; align-items:center; justify-content:center; font-size:25px; }
+  .feed .ft{ font-size:14.5px; font-weight:700; color:#3B4742; } .feed .fd{ font-size:12px; color:var(--ink2); margin-top:4px; line-height:1.5; }
+
+  .grp{ font-size:11px; font-weight:700; color:var(--accent-deep); padding:11px 0 4px; letter-spacing:.3px; }
+  .nr{ display:flex; align-items:baseline; padding:8px 0; border-bottom:1px solid #F4F7F5; } .nr:last-child{ border-bottom:none; }
+  .nr .nn{ flex:1; font-size:13px; color:#46504A; } .nr .nv{ font-size:13px; font-weight:700; color:#3B4742; } .nr .nu{ font-size:11px; color:#AEBAB4; margin-left:3px; font-weight:400; }
+  .nr .nk{ font-size:10px; font-weight:700; color:#A9B3AD; margin-left:8px; flex:none; }
+
+  .kv{ display:flex; padding:8px 0; border-bottom:1px solid #F4F7F5; font-size:13px; } .kv:last-child{ border-bottom:none; }
+  .kv .k{ width:74px; flex:none; color:var(--ink2); } .kv .v{ flex:1; color:#46504A; line-height:1.5; }
+
+  .rl{ display:flex; align-items:flex-start; gap:9px; padding:8px 0; font-size:13px; color:#46504A; line-height:1.5; }
+  .rl .ic{ flex:none; width:20px; text-align:center; } .rl.no .ic{ color:var(--warn-deep); } .rl.do .ic{ color:var(--accent-deep); }
+
+  .trace{ font-size:11px; color:#AAB4AE; padding:9px 0 3px; }
+  .foot{ font-size:11px; color:#AEBAB4; text-align:center; margin-top:16px; line-height:1.6; padding:0 6px; }
+</style>
+</head>
+<body>
+<div class="phone">
+  <div class="statusbar"><span>9:41</span><span class="dots">● ● ● ●</span></div>
+  <div class="scroll">
+    <div class="hello">0–3 岁 · 分阶段营养详情</div>
+    <h2>宝宝喂养</h2>
+    <div class="sub">选月龄,看这阶段每项营养的参考摄入量、喂养细节和安全要点。</div>
+
+    <div class="ages" id="ages"></div>
+    <div class="disc">⚠ 数值依据《中国居民膳食营养素参考摄入量(2023)》框架整理(RNI 推荐量 / AI 适宜摄入量口径),<b>上线前需以官方表逐条核对</b>;不同宝宝差异大,具体以儿保医生为准。</div>
+    <div id="content"></div>
+
+    <div class="foot">数据口径:中国营养学会《中国居民膳食营养素参考摄入量(2023)》《7–24月龄婴幼儿 / 学龄前儿童膳食指南》· WHO · 美国 AAP。</div>
+  </div>
+</div>
+
+<script>
+const S = [
+  { k:"0–6 月", t:"纯奶期", emoji:"🍼",
+    feed:"纯母乳 / 配方奶,按需喂",
+    feedDesc:"奶就是全部营养来源 —— 不喂水、不加辅食。",
+    macro:[ ["能量(EER)","90","kcal/kg·天","AI"], ["蛋白质","9","g/天","AI"], ["脂肪供能比","48","%E","AI"], ["亚油酸","7.3","%E","AI"] ],
+    mineral:[ ["钙","200","mg/天","AI"], ["铁","0.3","mg/天","AI"], ["锌","2.0","mg/天","AI"], ["碘","85","µg/天","AI"], ["钠","80","mg/天","AI"] ],
+    vitamin:[ ["维生素 A","300","µgRAE/天","AI"], ["维生素 D","10","µg(400IU)/天","AI"], ["维生素 C","40","mg/天","AI"] ],
+    other:[ ["DHA","100","mg/天","AI"], ["总水","0.7","L/天(全来自奶)","AI"] ],
+    care:[ ["奶量","按需,约 600–800 mL/天"], ["辅食","无"], ["补充剂","维生素 D 400 IU/天(生后数天起)"] ],
+    rules:[ ["do","只喝奶,不喂水、不加辅食"], ["do","按需喂养,不强迫定量"], ["do","坚持补维生素 D"] ],
+    src:"中国 DRIs 2023(0–6 月,AI 为主)" },
+
+  { k:"7–12 月", t:"加辅食", emoji:"🥄",
+    feed:"继续奶 600–800 mL + 引入辅食",
+    feedDesc:"奶仍是主力;辅食从 1 次加到 2–3 次,质地泥 → 末 → 小碎。",
+    macro:[ ["能量(EER)","80","kcal/kg·天","AI"], ["蛋白质","17","g/天","RNI"], ["脂肪供能比","40","%E","AI"] ],
+    mineral:[ ["钙","250","mg/天","AI"], ["铁","10","mg/天","RNI"], ["锌","3.5","mg/天","RNI"], ["碘","115","µg/天","AI"], ["钠","180","mg/天","AI"] ],
+    vitamin:[ ["维生素 A","350","µgRAE/天","AI"], ["维生素 D","10","µg(400IU)/天","AI"], ["维生素 C","40","mg/天","AI"] ],
+    other:[ ["DHA","100","mg/天","AI"], ["总水","0.9","L/天","AI"] ],
+    care:[ ["奶量","600–800 mL/天"], ["辅食","1→2–3 次/天,泥→末→碎"], ["补铁","第一口优先强化铁辅食 / 肉泥"], ["补充剂","维生素 D 继续"] ],
+    rules:[ ["no","不加盐、不加糖"], ["no","不喂蜂蜜(肉毒风险)"], ["no","防噎:整粒坚果 / 整颗葡萄 / 果冻"], ["do","尽早少量引入易致敏食物(蛋、花生酱等)"] ],
+    src:"中国《7–24 月龄婴幼儿喂养指南》+ DRIs 2023" },
+
+  { k:"1–2 岁", t:"过渡家庭饭", emoji:"🍚",
+    feed:"3 正餐 + 2 加餐,逐步吃家庭饭",
+    feedDesc:"越来越像和家人一起吃;奶仍要,但别让奶挤掉正餐。",
+    macro:[ ["能量(EER)","900","kcal/天","≈"], ["蛋白质","25","g/天","RNI"], ["脂肪供能比","35","%E","AI"] ],
+    mineral:[ ["钙","600","mg/天","RNI"], ["铁","9","mg/天","RNI"], ["锌","4.0","mg/天","RNI"], ["碘","90","µg/天","RNI"], ["钠","≤700","mg/天","AI"] ],
+    vitamin:[ ["维生素 A","310","µgRAE/天","RNI"], ["维生素 D","10","µg(400IU)/天","RNI"], ["维生素 C","40","mg/天","RNI"] ],
+    other:[ ["DHA","100","mg/天","AI"], ["总水","1.3","L/天","AI"] ],
+    care:[ ["奶量","约 500 mL(可全脂 / 继续母乳)"], ["餐次","3 正餐 + 2 加餐"], ["质地","软、碎到接近常规"] ],
+    rules:[ ["no","仍要少盐、少糖"], ["do","2 岁前不刻意限脂(脑发育需要)"], ["do","食物种类多样,自主进食"] ],
+    src:"中国《学龄前儿童膳食指南》+ DRIs 2023(1–3 岁微量口径)" },
+
+  { k:"2–3 岁", t:"家庭均衡膳食", emoji:"🍽️",
+    feed:"基本家庭均衡膳食",
+    feedDesc:"基本能跟着家里正常吃,重点是均衡和好习惯。",
+    macro:[ ["能量(EER)","1100","kcal/天","≈"], ["蛋白质","25","g/天","RNI"], ["脂肪供能比","30–35","%E","AI"] ],
+    mineral:[ ["钙","600","mg/天","RNI"], ["铁","9","mg/天","RNI"], ["锌","4.0","mg/天","RNI"], ["碘","90","µg/天","RNI"], ["钠","≤700","mg/天","AI"] ],
+    vitamin:[ ["维生素 A","310","µgRAE/天","RNI"], ["维生素 D","10","µg(400IU)/天","RNI"], ["维生素 C","40","mg/天","RNI"] ],
+    other:[ ["DHA","100","mg/天","AI"], ["总水","1.3–1.5","L/天","AI"] ],
+    care:[ ["奶量","350–500 mL"], ["餐次","3 正餐 + 1–2 加餐"], ["质地","常规家庭食物"] ],
+    rules:[ ["no","限制添加糖和钠"], ["do","种类齐、比例均衡,养好习惯"] ],
+    src:"中国《学龄前儿童膳食指南》+ DRIs 2023" },
+];
+
+let cur = 0;
+const agesBox = document.getElementById("ages");
+S.forEach((s,i)=>{
+  const el = document.createElement("div");
+  el.className = "age" + (i===0?" on":"");
+  el.innerHTML = `<div class="a1">${s.k}</div><div class="a2">${s.t}</div>`;
+  el.onclick = ()=>{ cur=i; document.querySelectorAll(".age").forEach((x,j)=>x.classList.toggle("on",j===i)); render(); };
+  agesBox.appendChild(el);
+});
+
+const rows = arr => arr.map(([n,v,u,k])=>`<div class="nr"><div class="nn">${n}</div><div class="nv">${v}<span class="nu">${u}</span></div><div class="nk">${k}</div></div>`).join("");
+
+function render(){
+  const s = S[cur];
+  document.getElementById("content").innerHTML = `
+    <div class="card pad feed"><div class="badge">${s.emoji}</div><div><div class="ft">${s.feed}</div><div class="fd">${s.feedDesc}</div></div></div>
+
+    <div class="sechead">营养参考摄入量 <span class="he">RNI 推荐 · AI 适宜</span></div>
+    <div class="card">
+      <div class="grp">宏量营养</div>${rows(s.macro)}
+      <div class="grp">矿物质</div>${rows(s.mineral)}
+      <div class="grp">维生素</div>${rows(s.vitamin)}
+      <div class="grp">其他</div>${rows(s.other)}
+      <div class="trace">据:${s.src}</div>
+    </div>
+
+    <div class="sechead">喂养细节</div>
+    <div class="card pad">${s.care.map(([k,v])=>`<div class="kv"><div class="k">${k}</div><div class="v">${v}</div></div>`).join("")}</div>
+
+    <div class="sechead">安全要点</div>
+    <div class="card pad">${s.rules.map(([k,t])=>`<div class="rl ${k}"><span class="ic">${k==="no"?"🚫":"✓"}</span><div>${t}</div></div>`).join("")}</div>`;
+}
+render();
+</script>
+</body>
+</html>
